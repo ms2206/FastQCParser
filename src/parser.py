@@ -1,14 +1,17 @@
 from argparse import Namespace
 from typing import List
 from class_defenitions import ParsedArg
+import pandas as pd
+from pandas import DataFrame
+import sys
 
 
 def handle_cli_args(args: Namespace) -> list[ParsedArg]:
-    '''
+    """
     :param args: cli arguments passed from user
     :return: a list of ParsedArg objects that have been configured to have their "Required outputs"
     adjusted based on expected output property.
-    '''
+    """
 
     # unpack args and create dict of all True items (optional args only)
     args_dict = {k: v for k, v in vars(args).items() if v == True}
@@ -25,11 +28,97 @@ def handle_cli_args(args: Namespace) -> list[ParsedArg]:
 
     return list_of_class_args
 
-def extract_from_arg(input_file: str, optional_arg: ParsedArg):
-    '''
-    :param
-    input_file: filepath for input FASTQC
-    optional_arg: An object of ParsedArg class e.g. ParsedArg(cli_argument='per_base_seq_qual', value=True, required_outputs=['R', 'P', 'F'])
-    :return:
-    '''
 
+def extract_raw(filepath: str, search_string: str) -> DataFrame:
+    """
+    Extracts a section of a CSV file based on a search string and returns it as a DataFrame.
+
+    This function reads a CSV file into a DataFrame, searches for a specified string within the 'raw' column,
+    and extracts rows from the first occurrence of the search string to the corresponding 'END_MODULE' marker.
+    The function uses a predefined mapping to determine the correct 'END_MODULE' for each search string.
+
+    Parameters:
+    filepath (str): The path to the CSV file to be read.
+    search_string (str): The string to search for within the 'raw' column of the DataFrame.
+
+    Returns:
+    DataFrame: A DataFrame containing the rows from the first occurrence of the search string to the corresponding 'END_MODULE'.
+
+    Raises:
+    FileNotFoundError: If the specified file does not exist, the function prints an error message and exits the program.
+
+    Example:
+    >>> extract_raw('path/to/your/file.csv', 'Basic Statistics')
+    """
+
+    fastq_order_map = dict([
+        ('Basic Statistics', 0),
+        ('Per base sequence quality', 1),
+        ('Per tile sequence quality', 2),
+        ('Per sequence quality scores', 3),
+        ('Per base sequence content', 4),
+        ('Per sequence GC content', 5),
+        ('Per base N content', 6),
+        ('Sequence Length Distribution', 7),
+        ('Sequence Duplication Levels', 8),
+        ('Overrepresented sequences', 9),
+        ('Adapter Content', 10),
+        ('Kmer Content', 11),
+
+    ])
+
+    try:
+        df = pd.read_csv(filepath, names=['raw'])
+    except FileNotFoundError as e:
+        print(f'The file {filepath} could not be found: {e}')
+        sys.exit(1)
+
+    index_start = df[df['raw'].str.contains(search_string)].index.tolist()
+    index_ends = df[df['raw'].str.contains('END_MODULE')].index.tolist()
+
+    # from search_string TO first END_MODULE
+    return df.iloc[index_start[0] + 1:index_ends[fastq_order_map[search_string]]]
+
+
+def parse_raw(raw_data: DataFrame) -> DataFrame:
+    """
+    Parses raw data from extract_raw().
+
+    This function processes a DataFrame containing raw data, where some lines start with '#'.
+    It extracts lines that do not start with '#', splits them on tab characters, and converts them into a list.
+    It extracts header lines that start with '#', splits them on tab characters, and uses the last header line as column names.
+    The function returns a formatted DataFrame with the extracted values and headers.
+
+    Parameters:
+    raw_data (DataFrame): The output from extract_raw()
+
+    Returns:
+    DataFrame: A formatted DataFrame with the extracted values and headers.
+
+    Example:
+    >>> raw_data = extract_raw('../data/raw/fastqc_data1.txt', 'Sequence Duplication Levels')
+    >>> formatted_df = parse_raw(raw_data)
+    >>> print(formatted_df)
+    """
+
+    # make sure incoming object is DataFrame
+    df_raw = pd.DataFrame(raw_data)
+
+    # extract lines NOT '#'
+    values_raw = df_raw[~df_raw['raw'].str.startswith('#')]
+    # convert to list by splitting on '\t'
+    values_list = values_raw['raw'].apply(lambda x: x.split('\t'))
+    values_list = values_list.tolist()
+
+    # extract line '#
+    headers_raw = df_raw[df_raw['raw'].str.startswith('#')]
+    headers_list = headers_raw['raw'].apply(lambda x: x.split('\t'))  # sometimes len > 1
+    if len(headers_list) > 1:
+        headers_list = headers_list.tolist()[-1]  # headers
+        # misc_out = headers_list.tolist()[0]                             # misc
+    else:
+        headers_list = headers_list.tolist()
+
+    formatted_df = pd.DataFrame(values_list, columns=headers_list)
+
+    return formatted_df
