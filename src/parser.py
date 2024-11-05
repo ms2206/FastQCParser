@@ -64,7 +64,7 @@ def extract_raw(filepath: str, search_string: str) -> DataFrame:
         ('Overrepresented sequences', 9),
         ('Adapter Content', 10),
         ('Kmer Content', 11),
-
+        ('All the above', 11) # if all return from last END_MODULE
     ])
 
     try:
@@ -77,7 +77,16 @@ def extract_raw(filepath: str, search_string: str) -> DataFrame:
     index_ends = df[df['raw'].str.contains('END_MODULE')].index.tolist()
 
     # from search_string TO first END_MODULE
-    return df.iloc[index_start[0] + 1:index_ends[fastq_order_map[search_string]]]
+    try:
+        raw_df = df.iloc[index_start[0] + 1:index_ends[fastq_order_map[search_string]]]
+    except IndexError as e:
+        if search_string == 'All the above':
+            raw_df = df
+        else:
+            print(f'Error: {e}')
+            exit(1)
+
+    return raw_df
 
 
 def parse_raw(raw_data: DataFrame) -> DataFrame:
@@ -116,6 +125,7 @@ def parse_raw(raw_data: DataFrame) -> DataFrame:
     if len(headers_list) > 1:
         headers_list = headers_list.tolist()[-1]  # headers
         # misc_out = headers_list.tolist()[0]                             # misc
+        #TODO: handle this case
     else:
         headers_list = headers_list.tolist()
 
