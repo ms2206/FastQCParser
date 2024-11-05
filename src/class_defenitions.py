@@ -10,8 +10,7 @@ class ParsedArg(dict):
                         ('seq_dup', 'Sequence Duplication Levels'),
                         ('over_seq', 'Overrepresented sequences'),
                         ('adap_cont', 'Adapter Content'),
-                        ('kmer_cont', 'K-mer Content'),
-                        ('all', 'All the above')
+                        ('kmer_cont', 'Kmer Content')
                         ])
 
     def __init__(self, cli_argument: str, value: str):
