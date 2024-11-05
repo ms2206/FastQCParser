@@ -1,5 +1,5 @@
 import argparse
-from parser import handle_cli_args
+from parser import handle_cli_args, extract_raw, parse_raw
 
 
 def parse_arguments():
@@ -37,11 +37,29 @@ def main():
     # returns a list of configured ParsedArg objects
     optional_args = handle_cli_args(args)
 
-    #TODO: make a function that will take in a ParsedArg and also args.input and args.output and return the data from the FastQC
+    # TODO: make a function that will take in a ParsedArg and also args.input and args.output and return the data from the FastQC
 
-    print(optional_args[0])
-    #data = extract_from_arg(optional_args[0])
+    print(optional_args)
 
+    for optional_arg in optional_args:
+        if optional_arg.cli_argument == 'all':
+            # recreate optional_args with all options as True
+            optional_args = argparse.Namespace(input_file=args.input_file, output_dir=args.output_dir,
+                                               per_base_seq_qual=True,
+                                               per_tile_seq_qual=True, per_seq_qual_scores=True,
+                                               per_base_seq_content=True,
+                                               per_seq_GC_cont=True, per_base_N_cont=True, seq_len_dist=True,
+                                               seq_dup=True,
+                                               over_seq=True, adap_cont=True, kmer_cont=True)
+
+            optional_args = handle_cli_args(optional_args)
+
+    # loop though args and print (for now)
+    for optional_arg in optional_args:
+        print(optional_arg)
+        raw_data = extract_raw(args.input_file, optional_arg.search_string)
+        parsed_data = parse_raw(raw_data)
+        print(parsed_data)
 
 
 if __name__ == '__main__':
