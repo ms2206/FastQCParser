@@ -1,5 +1,6 @@
 import argparse
 from parser import handle_cli_args, extract_raw, parse_raw
+import os
 
 
 def parse_arguments():
@@ -37,10 +38,6 @@ def main():
     # returns a list of configured ParsedArg objects
     optional_args = handle_cli_args(args)
 
-    # TODO: make a function that will take in a ParsedArg and also args.input and args.output and return the data from the FastQC
-
-    print(optional_args)
-
     for optional_arg in optional_args:
         if optional_arg.cli_argument == 'all':
             # recreate optional_args with all options as True
@@ -54,12 +51,20 @@ def main():
 
             optional_args = handle_cli_args(optional_args)
 
-    # loop though args and print (for now)
     for optional_arg in optional_args:
-        print(optional_arg)
+        # extract raw lines from fastqc
         raw_data = extract_raw(args.input_file, optional_arg.search_string)
+
+        # parse into df
         parsed_data = parse_raw(raw_data)
-        print(parsed_data)
+
+        # save files
+        os.makedirs(f'../data/processed/{optional_arg.cli_argument}', exist_ok=True)
+        parsed_data.to_csv(f'../data/processed/{optional_arg.cli_argument}/{optional_arg.cli_argument}.csv')
+
+    # TODO: save df as exported df into the output dir
+
+    # TODO: make some funkey plots
 
 
 if __name__ == '__main__':
