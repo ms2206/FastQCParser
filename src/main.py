@@ -1,5 +1,6 @@
 import argparse
 from parser import handle_cli_args, extract_raw, parse_raw
+from plotter import plot_adap_cont
 import os
 
 
@@ -58,14 +59,38 @@ def main():
         # parse into df
         parsed_data = parse_raw(raw_data)
 
-        # save files
+        # make dir and then save files
         os.makedirs(f'../data/processed/{optional_arg.cli_argument}', exist_ok=True)
         parsed_data.to_csv(f'../data/processed/{optional_arg.cli_argument}/{optional_arg.cli_argument}.csv')
 
-    # TODO: save df as exported df into the output dir
-
-    # TODO: make some funkey plots
-
+        if optional_arg.value:
+            if optional_arg.cli_argument == 'per_base_seq_qual':
+                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+            elif optional_arg.cli_argument == 'per_tile_seq_qual':
+                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+            elif optional_arg.cli_argument == 'per_seq_qual_scores':
+                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+            elif optional_arg.cli_argument == 'per_base_seq_content':
+                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+            elif optional_arg.cli_argument == 'per_seq_GC_cont':
+                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+            elif optional_arg.cli_argument == 'per_base_N_cont':
+                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+            elif optional_arg.cli_argument == 'seq_len_dist':
+                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+            elif optional_arg.cli_argument == 'seq_dup':
+                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+            elif optional_arg.cli_argument == 'over_seq':
+                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+            elif optional_arg.cli_argument == 'adap_cont':
+                plot_adap_cont()
+                pass
+            elif optional_arg.cli_argument == 'kmer_cont':
+                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+            else:
+                print(optional_arg)
 
 if __name__ == '__main__':
     main()
+
+
