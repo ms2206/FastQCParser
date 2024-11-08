@@ -2,6 +2,7 @@ import pandas as pd
 from pandas import DataFrame
 import plotly.graph_objects as go
 import plotly.express as px
+from scipy.stats import norm
 
 default_figsize = go.Layout(width=900, height=600)
 
@@ -36,18 +37,6 @@ def plot_adap_cont(cli_arg: str) -> None:
 
     # Save as PNG
     fig.write_image(f'../data/processed/{cli_arg}/{cli_arg}.png')
-
-
-def per_base_seq_qual(plot_type_name: str) -> None:
-    """
-    Plot and save per_base_seq_qual to filepath
-    :return: None
-    """
-
-    data = pd.read_csv(f'../data/processed/{plot_type_name}/{plot_type_name}.csv')
-
-    # Create a Plotly figure
-    fig = go.Figure()
 
 
 def plot_per_base_seq_qual(cli_arg: str) -> None:
@@ -160,3 +149,146 @@ def plot_per_seq_qual_scores(cli_arg: str) -> None:
 
     # Save as PNG
     fig.write_image(f'../data/processed/{cli_arg}/{cli_arg}.png')
+
+
+def plot_per_base_seq_content(cli_arg: str) -> None:
+    """
+    Plot and save per_base_seq_content to filepath
+    :return: None
+    """
+    # Extract data from file
+    data = pd.read_csv(f'../data/processed/{cli_arg}/{cli_arg}.csv')
+
+    # Create a Plotly figure
+    fig = go.Figure(layout=default_figsize)
+
+    # Add traces for each column
+    for column in data.columns[2:]:
+        fig.add_trace(go.Scatter(x=data['#Base'], y=data[column], mode='lines', name=column))
+
+    # Update layout
+    fig.update_layout(
+        title='Per base sequence content',
+        xaxis_title='Position in read (bp)',
+        yaxis_title='Sequence content across all bases',
+        template='plotly_white',
+    )
+
+    # Update y axis range
+    fig.update_yaxes(range=[0, 100])
+
+    # Save as HTML
+    fig.write_html(f'../data/processed/{cli_arg}/{cli_arg}.html')
+
+    # Save as PNG
+    fig.write_image(f'../data/processed/{cli_arg}/{cli_arg}.png')
+
+
+def plot_per_seq_GC_cont(cli_arg: str) -> None:
+    """
+    Plot and save per_base_seq_content to filepath
+    :return: None
+    """
+    # Extract data from file
+    data = pd.read_csv(f'../data/processed/{cli_arg}/{cli_arg}.csv')
+
+    # For Theoretical Distribution
+    ## Calculate Mean
+    mean = data['#GC Content'].mean()
+    st_dev = 10
+
+    # Scaled distribution of GC Content
+    probability_density = norm.pdf(data['#GC Content'], mean, st_dev) * 4.5e7
+    data['probability_density'] = probability_density
+
+    # Create a Plotly figure
+    fig = go.Figure(layout=default_figsize)
+
+    # Add traces
+    fig.add_trace(go.Scatter(x=data['#GC Content'], y=data['Count'], name='GC Content'))
+    fig.add_trace(go.Scatter(x=data['#GC Content'], y=data['probability_density'], line=dict(dash='dash'),
+                             name='Theoretical Distribution'))
+
+    # Update layout
+    fig.update_layout(
+        title='Per sequence GC content',
+        xaxis_title='GC content',
+        yaxis_title='Count',
+        template='plotly_white',
+    )
+
+    # Save as HTML
+    fig.write_html(f'../data/processed/{cli_arg}/{cli_arg}.html')
+
+    # Save as PNG
+    fig.write_image(f'../data/processed/{cli_arg}/{cli_arg}.png')
+
+
+def plot_per_base_N_cont(cli_arg: str) -> None:
+    """
+    Plot and save per_base_N_cont to filepath
+    :return: None
+    """
+    # Extract data from file
+    data = pd.read_csv(f'../data/processed/{cli_arg}/{cli_arg}.csv')
+
+    # Make Figure
+    fig = go.Figure(layout=default_figsize)
+
+    fig.add_trace(go.Scatter(x=data['#Base'], y=data['N-Count'], name='N-Count'))
+
+    fig.update_yaxes(range=[0, 100])
+
+    # Update layout
+    fig.update_layout(
+        title='Adapter content by position',
+        xaxis_title='Position in read (bp)',
+        yaxis_title='N content across all bases',
+        template='plotly_white',
+        showlegend=True
+    )
+
+    # Save as HTML
+    fig.write_html(f'../data/processed/{cli_arg}/{cli_arg}.html')
+
+    # Save as PNG
+    fig.write_image(f'../data/processed/{cli_arg}/{cli_arg}.png')
+
+
+def plot_seq_len_dist(cli_arg: str) -> None:
+    """
+    Plot and save per_base_N_cont to filepath
+    :return: None
+    """
+    # Extract data from file
+    data = pd.read_csv(f'../data/processed/{cli_arg}/{cli_arg}.csv')
+
+    # Conver Count to Count (millions)
+    data['Count_millions'] = [count / 1e6 for count in data['Count']]  # Convert to millions
+
+    # Make Figure
+    fig = go.Figure(layout=default_figsize)
+
+    # Plot trace
+    fig.add_trace(go.Bar(x=data['#Length'], y=data['Count_millions'], name='Count'))
+
+    # Update layout
+    fig.update_layout(
+        title='Sequence Length Distribution',
+        xaxis_title='Position in read (bp)',
+        yaxis_title='Sequence Length (per million reads)',
+        template='plotly_white',
+    )
+
+    # Update x-axis to show +/- 5 to show data spread
+    fig.update_xaxes(range=[min(data['#Length']) - 5, max(data['#Length']) + 5], dtick=1)
+
+    # Update y-axis for human-readable formatting
+    fig.update_yaxes(tickformat=".2f", ticksuffix=" M")
+
+    # Save as HTML
+    fig.write_html(f'../data/processed/{cli_arg}/{cli_arg}.html')
+
+    # Save as PNG
+    fig.write_image(f'../data/processed/{cli_arg}/{cli_arg}.png')
+
