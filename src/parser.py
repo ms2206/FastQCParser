@@ -78,7 +78,7 @@ def extract_raw(filepath: str, search_string: str) -> DataFrame:
 
     # from search_string TO first END_MODULE
     try:
-        raw_df = df.iloc[index_start[0] + 1:index_ends[fastq_order_map[search_string]]]
+        raw_df = df.iloc[index_start[0]:index_ends[fastq_order_map[search_string]]]
     except IndexError as e:
         if search_string == 'All the above':
             raw_df = df
