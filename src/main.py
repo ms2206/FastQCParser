@@ -1,6 +1,6 @@
 import argparse
 from parser import handle_cli_args, extract_raw, parse_raw
-from plotter import plot_adap_cont, plot_per_base_seq_qual
+from plotter import plot_adap_cont, plot_per_base_seq_qual, plot_per_tile_seq_qual, plot_per_seq_qual_scores
 import os
 
 
@@ -66,10 +66,14 @@ def main():
         if optional_arg.value:
             if optional_arg.cli_argument == 'per_base_seq_qual':
                 plot_per_base_seq_qual(optional_arg.cli_argument)
+
             elif optional_arg.cli_argument == 'per_tile_seq_qual':
-                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+                plot_per_tile_seq_qual(optional_arg.cli_argument)
+
             elif optional_arg.cli_argument == 'per_seq_qual_scores':
-                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+                plot_per_seq_qual_scores(optional_arg)
+                #print(f'I dont have a function yet for {optional_arg.cli_argument}')
+
             elif optional_arg.cli_argument == 'per_base_seq_content':
                 print(f'I dont have a function yet for {optional_arg.cli_argument}')
             elif optional_arg.cli_argument == 'per_seq_GC_cont':
@@ -84,6 +88,7 @@ def main():
                 print(f'I dont have a function yet for {optional_arg.cli_argument}')
             elif optional_arg.cli_argument == 'adap_cont':
                 plot_adap_cont(optional_arg.cli_argument)
+
             elif optional_arg.cli_argument == 'kmer_cont':
                 print(f'I dont have a function yet for {optional_arg.cli_argument}')
             else:

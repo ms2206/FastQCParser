@@ -1,8 +1,10 @@
 import pandas as pd
 from pandas import DataFrame
 import plotly.graph_objects as go
+import plotly.express as px
 
 default_figsize = go.Layout(width=900, height=600)
+
 
 def plot_adap_cont(cli_arg: str) -> None:
     """
@@ -50,7 +52,7 @@ def per_base_seq_qual(plot_type_name: str) -> None:
 
 def plot_per_base_seq_qual(cli_arg: str) -> None:
     """
-    Plot and save plot_per_base_seq_qual to filepath
+    Plot and save per_base_seq_qual to filepath
     :return: None
     """
 
@@ -59,7 +61,7 @@ def plot_per_base_seq_qual(cli_arg: str) -> None:
     box_plots = []
 
     # Collect data points for manually creating box plot
-    for index, row in data.iloc[:, 1:7].iterrows():
+    for index, row in data.iloc[:, 1:].iterrows():
         box_plots.append(
             go.Box(y=[row['Lower Quartile'], row['Median'], row['Upper Quartile']],
                    name=int(row['#Base']),
@@ -95,6 +97,62 @@ def plot_per_base_seq_qual(cli_arg: str) -> None:
         showlegend=False,
         yaxis=dict(range=[0, max(data['Upper Quartile']) + 5]),
         xaxis=dict(tickangle=0)
+    )
+
+    # Save as HTML
+    fig.write_html(f'../data/processed/{cli_arg}/{cli_arg}.html')
+
+    # Save as PNG
+    fig.write_image(f'../data/processed/{cli_arg}/{cli_arg}.png')
+
+
+def plot_per_tile_seq_qual(cli_arg: str) -> None:
+    """
+    Plot and save per_tile_seq_qual to filepath
+    :return: None
+    """
+
+    # Extract data from file
+    data = pd.read_csv(f'../data/processed/{cli_arg}/{cli_arg}.csv')
+
+    # Plot heat map
+    fig = px.density_heatmap(data, y='Base', x='#Tile', z='Mean', color_continuous_scale='Viridis', nbinsx=15,
+                             nbinsy=15)
+    fig.update_layout(
+        title='Per aggregated tile sequence quality',
+        yaxis_title='Position in read (bp)',
+        xaxis_title='Tile position of flowcell',
+        template='plotly_white',
+        coloraxis_colorbar_title='Avg. Q30',
+        width=900, height=600
+    )
+
+    # Save as HTML
+    fig.write_html(f'../data/processed/{cli_arg}/{cli_arg}.html')
+
+    # Save as PNG
+    fig.write_image(f'../data/processed/{cli_arg}/{cli_arg}.png')
+
+
+def plot_per_seq_qual_scores(cli_arg: str) -> None:
+    """
+    Plot and save per_seq_qual_scores to filepath
+    :return: None
+    """
+
+    # Extract data from file
+    data = pd.read_csv(f'../data/processed/{cli_arg}/{cli_arg}.csv')
+
+    # Update the name from 40 to "Q40"
+    data['Display'] = data['#Quality'].astype(str).apply(lambda x: 'Q' + x)
+
+    # Plot treemap
+    fig = px.treemap(data.iloc[:, 1:], path=['Display'], values='Count')
+
+    fig.update_layout(
+        title='Count of Phred score',
+        template='plotly_white',
+        width=900, height=600
     )
 
     # Save as HTML
