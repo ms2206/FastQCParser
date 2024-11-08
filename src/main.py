@@ -96,11 +96,17 @@ def main():
         raw_data = extract_raw(args.input_file, optional_arg.search_string)
 
         # parse into df
-        parsed_data = parse_raw(raw_data)
+        parsed_data = parse_raw(raw_data.iloc[1:])
 
         # make dir and then save files
         os.makedirs(f'../data/processed/{args.output_dir}/{optional_arg.cli_argument}', exist_ok=True)
         parsed_data.to_csv(f'../data/processed/{args.output_dir}/{optional_arg.cli_argument}/{optional_arg.cli_argument}.csv')
+
+        # flag
+        # first row of the raw_data, tab split
+        flag = raw_data.iloc[0].apply(lambda x: x.split('\t')).tolist()[0][1]
+        with open(f'../data/processed/{args.output_dir}/{optional_arg.cli_argument}/flag.txt', 'w') as file:
+            file.write(flag)
 
         if optional_arg.value:
             if 'P' in optional_arg.required_outputs:
