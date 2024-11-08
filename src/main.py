@@ -146,3 +146,6 @@ def main():
     print(qotd_call())
 if __name__ == '__main__':
     main()
+
+
+#TODO: Extract flag
