@@ -1,6 +1,7 @@
 import argparse
 from parser import handle_cli_args, extract_raw, parse_raw
-from plotter import plot_adap_cont, plot_per_base_seq_qual, plot_per_tile_seq_qual, plot_per_seq_qual_scores
+from plotter import plot_adap_cont, plot_per_base_seq_qual, plot_per_tile_seq_qual, plot_per_seq_qual_scores, \
+    plot_per_base_seq_content, plot_per_seq_GC_cont, plot_per_base_N_cont, plot_seq_len_dist
 import os
 
 
@@ -71,17 +72,20 @@ def main():
                 plot_per_tile_seq_qual(optional_arg.cli_argument)
 
             elif optional_arg.cli_argument == 'per_seq_qual_scores':
-                plot_per_seq_qual_scores(optional_arg)
-                #print(f'I dont have a function yet for {optional_arg.cli_argument}')
+                plot_per_seq_qual_scores(optional_arg.cli_argument)
 
             elif optional_arg.cli_argument == 'per_base_seq_content':
-                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+                plot_per_base_seq_content(optional_arg.cli_argument)
+
             elif optional_arg.cli_argument == 'per_seq_GC_cont':
-                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+                plot_per_seq_GC_cont(optional_arg.cli_argument)
+
             elif optional_arg.cli_argument == 'per_base_N_cont':
-                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+                plot_per_base_N_cont(optional_arg.cli_argument)
+
             elif optional_arg.cli_argument == 'seq_len_dist':
-                print(f'I dont have a function yet for {optional_arg.cli_argument}')
+                plot_seq_len_dist(optional_arg.cli_argument)
+
             elif optional_arg.cli_argument == 'seq_dup':
                 print(f'I dont have a function yet for {optional_arg.cli_argument}')
             elif optional_arg.cli_argument == 'over_seq':
