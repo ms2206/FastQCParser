@@ -1,8 +1,13 @@
 import argparse
 from parser import handle_cli_args, extract_raw, parse_raw
 from plotter import plot_adap_cont, plot_per_base_seq_qual, plot_per_tile_seq_qual, plot_per_seq_qual_scores, \
-    plot_per_base_seq_content, plot_per_seq_GC_cont, plot_per_base_N_cont, plot_seq_len_dist, plot_seq_dup, plot_kmer_cont
+    plot_per_base_seq_content, plot_per_seq_GC_cont, plot_per_base_N_cont, plot_seq_len_dist, plot_seq_dup, \
+    plot_kmer_cont
 import os
+from tabulate import tabulate
+from pyfiglet import figlet_format
+import emoji
+from utils import qotd_call
 
 
 def parse_arguments():
@@ -35,9 +40,42 @@ def parse_arguments():
 
 
 def main():
+    # Parse Args
     args = parse_arguments()
 
-    # returns a list of configured ParsedArg objects
+    # Extract Basic Statistics
+    basic_stats_raw = extract_raw(args.input_file, 'Basic Statistics')
+    formatted_df = parse_raw(basic_stats_raw)
+
+    ## CLI Output and Welcome Page
+
+    # ASCII Art Title
+    title = figlet_format('FastQC Parser', font='slant')
+    print(title)
+
+    # Author and Project Information
+    print('Author: Matthew Spriggs')
+    print('GitHub: https://github.com/ms2206/FastQCParser.git')
+    print('Email: matthew.spriggs.452@cranfield.ac.uk')
+    print('Version: 1.0.0')
+    print(emoji.emojize('Donations Welcome :red_heart:'))
+    print('____________________________________________________________________________________\n')
+
+    # Divider
+    print('#' * 84)
+    print()
+    print('BASIC STATISTICS')
+    print(tabulate(formatted_df, headers=[], tablefmt='grid'))
+    print()
+    print('#' * 84)
+    print(f'INPUT FILE USED: {args.input_file}')
+    print(f'OUTPUT DIRECTORY USED: /FastQCParser/data/processed/{args.output_dir}/')
+    print('__\n')
+    print(emoji.emojize('Loading Reports ... :thinking_face:'))
+    print()
+
+
+        # returns a list of configured ParsedArg objects
     optional_args = handle_cli_args(args)
 
     for optional_arg in optional_args:
@@ -61,49 +99,50 @@ def main():
         parsed_data = parse_raw(raw_data)
 
         # make dir and then save files
-        os.makedirs(f'../data/processed/{optional_arg.cli_argument}', exist_ok=True)
-        parsed_data.to_csv(f'../data/processed/{optional_arg.cli_argument}/{optional_arg.cli_argument}.csv')
+        os.makedirs(f'../data/processed/{args.output_dir}/{optional_arg.cli_argument}', exist_ok=True)
+        parsed_data.to_csv(f'../data/processed/{args.output_dir}/{optional_arg.cli_argument}/{optional_arg.cli_argument}.csv')
 
         if optional_arg.value:
             if 'P' in optional_arg.required_outputs:
                 if optional_arg.cli_argument == 'per_base_seq_qual':
-                    plot_per_base_seq_qual(optional_arg.cli_argument)
+                    plot_per_base_seq_qual(optional_arg.cli_argument, args.output_dir)
 
                 elif optional_arg.cli_argument == 'per_tile_seq_qual':
-                    plot_per_tile_seq_qual(optional_arg.cli_argument)
+                    plot_per_tile_seq_qual(optional_arg.cli_argument, args.output_dir)
 
                 elif optional_arg.cli_argument == 'per_seq_qual_scores':
-                    plot_per_seq_qual_scores(optional_arg.cli_argument)
+                    plot_per_seq_qual_scores(optional_arg.cli_argument, args.output_dir)
 
                 elif optional_arg.cli_argument == 'per_base_seq_content':
-                    plot_per_base_seq_content(optional_arg.cli_argument)
+                    plot_per_base_seq_content(optional_arg.cli_argument, args.output_dir)
 
                 elif optional_arg.cli_argument == 'per_seq_GC_cont':
-                    plot_per_seq_GC_cont(optional_arg.cli_argument)
+                    plot_per_seq_GC_cont(optional_arg.cli_argument, args.output_dir)
 
                 elif optional_arg.cli_argument == 'per_base_N_cont':
-                    plot_per_base_N_cont(optional_arg.cli_argument)
+                    plot_per_base_N_cont(optional_arg.cli_argument, args.output_dir)
 
                 elif optional_arg.cli_argument == 'seq_len_dist':
                     ## NO PLT CURRENTLY REQUIRED ##
-                    plot_seq_len_dist(optional_arg.cli_argument)
+                    plot_seq_len_dist(optional_arg.cli_argument, args.output_dir)
 
                 elif optional_arg.cli_argument == 'seq_dup':
-                    plot_seq_dup(optional_arg.cli_argument)
+                    plot_seq_dup(optional_arg.cli_argument, args.output_dir)
 
                 elif optional_arg.cli_argument == 'over_seq':
                     ## NO PLT CURRENTLY REQUIRED ##
                     continue
 
                 elif optional_arg.cli_argument == 'adap_cont':
-                    plot_adap_cont(optional_arg.cli_argument)
+                    plot_adap_cont(optional_arg.cli_argument, args.output_dir)
 
                 elif optional_arg.cli_argument == 'kmer_cont':
-                    plot_kmer_cont(optional_arg.cli_argument)
+                    plot_kmer_cont(optional_arg.cli_argument, args.output_dir)
 
                 else:
                     print(optional_arg)
 
-
+    print(emoji.emojize('... Complete! :smiling_face_with_sunglasses:'))
+    print(qotd_call())
 if __name__ == '__main__':
     main()
