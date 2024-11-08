@@ -21,7 +21,7 @@ class ParsedArg(dict):
 
 
     def configure_outputs(self):
-        if self.cli_argument in ['seq_len_dist', 'over_seq']:
+        if self.cli_argument in ['seq_len_dist', 'over_seq']: # Could be made CONSTANT.
             self.required_outputs.remove('P')
         return self.required_outputs
 
