@@ -1,7 +1,7 @@
 import argparse
 from parser import handle_cli_args, extract_raw, parse_raw
 from plotter import plot_adap_cont, plot_per_base_seq_qual, plot_per_tile_seq_qual, plot_per_seq_qual_scores, \
-    plot_per_base_seq_content, plot_per_seq_GC_cont, plot_per_base_N_cont, plot_seq_len_dist
+    plot_per_base_seq_content, plot_per_seq_GC_cont, plot_per_base_N_cont, plot_seq_len_dist, plot_seq_dup, plot_kmer_cont
 import os
 
 
@@ -65,40 +65,45 @@ def main():
         parsed_data.to_csv(f'../data/processed/{optional_arg.cli_argument}/{optional_arg.cli_argument}.csv')
 
         if optional_arg.value:
-            if optional_arg.cli_argument == 'per_base_seq_qual':
-                plot_per_base_seq_qual(optional_arg.cli_argument)
+            if 'P' in optional_arg.required_outputs:
+                if optional_arg.cli_argument == 'per_base_seq_qual':
+                    plot_per_base_seq_qual(optional_arg.cli_argument)
 
-            elif optional_arg.cli_argument == 'per_tile_seq_qual':
-                plot_per_tile_seq_qual(optional_arg.cli_argument)
+                elif optional_arg.cli_argument == 'per_tile_seq_qual':
+                    plot_per_tile_seq_qual(optional_arg.cli_argument)
 
-            elif optional_arg.cli_argument == 'per_seq_qual_scores':
-                plot_per_seq_qual_scores(optional_arg.cli_argument)
+                elif optional_arg.cli_argument == 'per_seq_qual_scores':
+                    plot_per_seq_qual_scores(optional_arg.cli_argument)
 
-            elif optional_arg.cli_argument == 'per_base_seq_content':
-                plot_per_base_seq_content(optional_arg.cli_argument)
+                elif optional_arg.cli_argument == 'per_base_seq_content':
+                    plot_per_base_seq_content(optional_arg.cli_argument)
 
-            elif optional_arg.cli_argument == 'per_seq_GC_cont':
-                plot_per_seq_GC_cont(optional_arg.cli_argument)
+                elif optional_arg.cli_argument == 'per_seq_GC_cont':
+                    plot_per_seq_GC_cont(optional_arg.cli_argument)
 
-            elif optional_arg.cli_argument == 'per_base_N_cont':
-                plot_per_base_N_cont(optional_arg.cli_argument)
+                elif optional_arg.cli_argument == 'per_base_N_cont':
+                    plot_per_base_N_cont(optional_arg.cli_argument)
 
-            elif optional_arg.cli_argument == 'seq_len_dist':
-                plot_seq_len_dist(optional_arg.cli_argument)
+                elif optional_arg.cli_argument == 'seq_len_dist':
+                    ## NO PLT CURRENTLY REQUIRED ##
+                    plot_seq_len_dist(optional_arg.cli_argument)
 
-            elif optional_arg.cli_argument == 'seq_dup':
-                print(f'I dont have a function yet for {optional_arg.cli_argument}')
-            elif optional_arg.cli_argument == 'over_seq':
-                print(f'I dont have a function yet for {optional_arg.cli_argument}')
-            elif optional_arg.cli_argument == 'adap_cont':
-                plot_adap_cont(optional_arg.cli_argument)
+                elif optional_arg.cli_argument == 'seq_dup':
+                    plot_seq_dup(optional_arg.cli_argument)
 
-            elif optional_arg.cli_argument == 'kmer_cont':
-                print(f'I dont have a function yet for {optional_arg.cli_argument}')
-            else:
-                print(optional_arg)
+                elif optional_arg.cli_argument == 'over_seq':
+                    ## NO PLT CURRENTLY REQUIRED ##
+                    continue
+
+                elif optional_arg.cli_argument == 'adap_cont':
+                    plot_adap_cont(optional_arg.cli_argument)
+
+                elif optional_arg.cli_argument == 'kmer_cont':
+                    plot_kmer_cont(optional_arg.cli_argument)
+
+                else:
+                    print(optional_arg)
+
 
 if __name__ == '__main__':
     main()
-
-

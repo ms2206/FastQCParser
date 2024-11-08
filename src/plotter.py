@@ -3,6 +3,7 @@ from pandas import DataFrame
 import plotly.graph_objects as go
 import plotly.express as px
 from scipy.stats import norm
+from plotly.subplots import make_subplots
 
 default_figsize = go.Layout(width=900, height=600)
 
@@ -291,4 +292,82 @@ def plot_seq_len_dist(cli_arg: str) -> None:
 
     # Save as PNG
     fig.write_image(f'../data/processed/{cli_arg}/{cli_arg}.png')
+
+def plot_seq_dup(cli_arg: str) -> None:
+    """
+    Plot and save per_base_N_cont to filepath
+    :return: None
+    """
+    # Extract data from file
+    data = pd.read_csv(f'../data/processed/{cli_arg}/{cli_arg}.csv')
+
+    fig = go.Figure(layout=default_figsize)
+
+    fig.add_trace(
+        go.Bar(x=data['#Duplication Level'], y=data['Percentage of deduplicated'], name='Percentage of deduplicated'))
+    fig.add_trace(go.Bar(x=data['#Duplication Level'], y=data['Percentage of total'], name='Percentage of total'))
+
+    # Update layout
+    fig.update_layout(
+        title='Sequence Duplication Levels',
+        xaxis_title='Duplication Level',
+        yaxis_title='Percentage of sequences',
+        template='plotly_white',
+    )
+
+    # Save as HTML
+    fig.write_html(f'../data/processed/{cli_arg}/{cli_arg}.html')
+
+    # Save as PNG
+    fig.write_image(f'../data/processed/{cli_arg}/{cli_arg}.png')
+
+
+def plot_kmer_cont(cli_arg: str) -> None:
+    """
+    Plot and save per_base_N_cont to filepath
+    :return: None
+    """
+    # Extract data from file
+    data = pd.read_csv(f'../data/processed/{cli_arg}/{cli_arg}.csv')
+
+    fig = make_subplots(
+        rows=1, cols=2,
+        shared_yaxes=True,
+        subplot_titles=['Obs/Exp Max', 'Max Obs/Exp Position'],
+        horizontal_spacing=0.1
+    )
+
+    fig.add_trace(
+        go.Bar(
+            y=data['#Sequence'], x=data['Count'], name='Obs/Exp Max', orientation='h',
+            marker=dict(color=data['Obs/Exp Max'], colorscale='Blues', line=dict(color='black', width=2))
+        ), row=1, col=1
+    )
+
+    fig.add_trace(
+        go.Bar(
+            y=data['#Sequence'], x=data['Count'], name='Max Obs/Exp Position', orientation='h',
+            marker=dict(color=data['Max Obs/Exp Position'], colorscale='Blues',
+                        colorbar=dict(title='Color Scale', x=1.05, xanchor='left'), line=dict(color='black', width=2))
+        ), row=1, col=2
+    )
+
+    # Update layout
+    fig.update_layout(
+        title="Sequence Counts",
+        showlegend=False,
+        xaxis=dict(title='Count of motifs', side='bottom', title_standoff=25),  # Centralize x-axis title
+        xaxis2=dict(title='Count of motifs', side='bottom', title_standoff=25),  # Centralize for second subplot
+        template='plotly_white',
+        width=900, height=600
+    )
+
+    # Save as HTML
+    fig.write_html(f'../data/processed/{cli_arg}/{cli_arg}.html')
+
+    # Save as PNG
+    fig.write_image(f'../data/processed/{cli_arg}/{cli_arg}.png')
+
+
+
 
