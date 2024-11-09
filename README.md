@@ -1,3 +1,4 @@
 # FastQCParser
 
-main will get arguments from user
+See technical documentation:
+https://ms2206.github.io/FastQCParser/
