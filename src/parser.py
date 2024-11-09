@@ -70,8 +70,10 @@ def extract_raw(filepath: str, search_string: str) -> DataFrame:
     try:
         df = pd.read_csv(filepath, names=['raw'])
     except FileNotFoundError as e:
-        print(f'The file {filepath} could not be found: {e}')
+        print(f'\033[91mWarning!\033[0m The file: \'{filepath}\' has vanished into hyperspace. Double-check your coordinates and try again:\n{e}')
         sys.exit(1)
+
+
 
     index_start = df[df['raw'].str.contains(search_string)].index.tolist()
     index_ends = df[df['raw'].str.contains('END_MODULE')].index.tolist()
@@ -105,7 +107,7 @@ def parse_raw(raw_data: DataFrame) -> DataFrame:
     DataFrame: A formatted DataFrame with the extracted values and headers.
 
     Example:
-    >>> raw_data = extract_raw('../data/raw/fastqc_data1.txt', 'Sequence Duplication Levels')
+    >>> raw_data = extract_raw('data/raw/fastqc_data1.txt', 'Sequence Duplication Levels')
     >>> formatted_df = parse_raw(raw_data)
     >>> print(formatted_df)
     """

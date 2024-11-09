@@ -15,7 +15,7 @@ def plot_adap_cont(cli_arg: str, output_dir:str) -> None:
     """
 
     # Extract data from file
-    data = pd.read_csv(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.csv')
+    data = pd.read_csv(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_report.csv')
 
     # Create a Plotly figure
     fig = go.Figure(layout=default_figsize)
@@ -34,10 +34,10 @@ def plot_adap_cont(cli_arg: str, output_dir:str) -> None:
     )
 
     # Save as HTML
-    fig.write_html(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.html')
+    fig.write_html(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.html')
 
     # Save as PNG
-    fig.write_image(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.png')
+    fig.write_image(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.png')
 
 
 def plot_per_base_seq_qual(cli_arg: str, output_dir:str) -> None:
@@ -47,7 +47,7 @@ def plot_per_base_seq_qual(cli_arg: str, output_dir:str) -> None:
     """
 
     # Extract data from file
-    data = pd.read_csv(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.csv')
+    data = pd.read_csv(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_report.csv')
     box_plots = []
 
     # Collect data points for manually creating box plot
@@ -90,10 +90,10 @@ def plot_per_base_seq_qual(cli_arg: str, output_dir:str) -> None:
     )
 
     # Save as HTML
-    fig.write_html(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.html')
+    fig.write_html(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.html')
 
     # Save as PNG
-    fig.write_image(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.png')
+    fig.write_image(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.png')
 
 
 def plot_per_tile_seq_qual(cli_arg: str, output_dir:str) -> None:
@@ -103,7 +103,7 @@ def plot_per_tile_seq_qual(cli_arg: str, output_dir:str) -> None:
     """
 
     # Extract data from file
-    data = pd.read_csv(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.csv')
+    data = pd.read_csv(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_report.csv')
 
     # Plot heat map
     fig = px.density_heatmap(data, y='Base', x='#Tile', z='Mean', color_continuous_scale='Viridis', nbinsx=15,
@@ -118,10 +118,10 @@ def plot_per_tile_seq_qual(cli_arg: str, output_dir:str) -> None:
     )
 
     # Save as HTML
-    fig.write_html(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.html')
+    fig.write_html(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.html')
 
     # Save as PNG
-    fig.write_image(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.png')
+    fig.write_image(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.png')
 
 
 def plot_per_seq_qual_scores(cli_arg: str, output_dir:str) -> None:
@@ -131,7 +131,7 @@ def plot_per_seq_qual_scores(cli_arg: str, output_dir:str) -> None:
     """
 
     # Extract data from file
-    data = pd.read_csv(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.csv')
+    data = pd.read_csv(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_report.csv')
 
     # Update the name from 40 to "Q40"
     data['Display'] = data['#Quality'].astype(str).apply(lambda x: 'Q' + x)
@@ -146,10 +146,10 @@ def plot_per_seq_qual_scores(cli_arg: str, output_dir:str) -> None:
     )
 
     # Save as HTML
-    fig.write_html(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.html')
+    fig.write_html(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.html')
 
     # Save as PNG
-    fig.write_image(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.png')
+    fig.write_image(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.png')
 
 
 def plot_per_base_seq_content(cli_arg: str, output_dir:str) -> None:
@@ -158,7 +158,7 @@ def plot_per_base_seq_content(cli_arg: str, output_dir:str) -> None:
     :return: None
     """
     # Extract data from file
-    data = pd.read_csv(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.csv')
+    data = pd.read_csv(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_report.csv')
 
     # Create a Plotly figure
     fig = go.Figure(layout=default_figsize)
@@ -179,10 +179,10 @@ def plot_per_base_seq_content(cli_arg: str, output_dir:str) -> None:
     fig.update_yaxes(range=[0, 100])
 
     # Save as HTML
-    fig.write_html(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.html')
+    fig.write_html(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.html')
 
     # Save as PNG
-    fig.write_image(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.png')
+    fig.write_image(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.png')
 
 
 def plot_per_seq_GC_cont(cli_arg: str, output_dir:str) -> None:
@@ -191,7 +191,7 @@ def plot_per_seq_GC_cont(cli_arg: str, output_dir:str) -> None:
     :return: None
     """
     # Extract data from file
-    data = pd.read_csv(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.csv')
+    data = pd.read_csv(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_report.csv')
 
     # For Theoretical Distribution
     ## Calculate Mean
@@ -219,10 +219,10 @@ def plot_per_seq_GC_cont(cli_arg: str, output_dir:str) -> None:
     )
 
     # Save as HTML
-    fig.write_html(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.html')
+    fig.write_html(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.html')
 
     # Save as PNG
-    fig.write_image(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.png')
+    fig.write_image(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.png')
 
 
 def plot_per_base_N_cont(cli_arg: str, output_dir:str) -> None:
@@ -231,7 +231,7 @@ def plot_per_base_N_cont(cli_arg: str, output_dir:str) -> None:
     :return: None
     """
     # Extract data from file
-    data = pd.read_csv(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.csv')
+    data = pd.read_csv(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_report.csv')
 
     # Make Figure
     fig = go.Figure(layout=default_figsize)
@@ -250,10 +250,10 @@ def plot_per_base_N_cont(cli_arg: str, output_dir:str) -> None:
     )
 
     # Save as HTML
-    fig.write_html(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.html')
+    fig.write_html(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.html')
 
     # Save as PNG
-    fig.write_image(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.png')
+    fig.write_image(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.png')
 
 
 def plot_seq_len_dist(cli_arg: str, output_dir:str) -> None:
@@ -262,7 +262,7 @@ def plot_seq_len_dist(cli_arg: str, output_dir:str) -> None:
     :return: None
     """
     # Extract data from file
-    data = pd.read_csv(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.csv')
+    data = pd.read_csv(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_report.csv')
 
     # Conver Count to Count (millions)
     data['Count_millions'] = [count / 1e6 for count in data['Count']]  # Convert to millions
@@ -288,10 +288,10 @@ def plot_seq_len_dist(cli_arg: str, output_dir:str) -> None:
     fig.update_yaxes(tickformat=".2f", ticksuffix=" M")
 
     # Save as HTML
-    fig.write_html(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.html')
+    fig.write_html(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.html')
 
     # Save as PNG
-    fig.write_image(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.png')
+    fig.write_image(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.png')
 
 def plot_seq_dup(cli_arg: str, output_dir:str) -> None:
     """
@@ -299,7 +299,7 @@ def plot_seq_dup(cli_arg: str, output_dir:str) -> None:
     :return: None
     """
     # Extract data from file
-    data = pd.read_csv(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.csv')
+    data = pd.read_csv(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_report.csv')
 
     fig = go.Figure(layout=default_figsize)
 
@@ -316,10 +316,10 @@ def plot_seq_dup(cli_arg: str, output_dir:str) -> None:
     )
 
     # Save as HTML
-    fig.write_html(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.html')
+    fig.write_html(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.html')
 
     # Save as PNG
-    fig.write_image(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.png')
+    fig.write_image(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.png')
 
 
 def plot_kmer_cont(cli_arg: str, output_dir:str) -> None:
@@ -328,7 +328,7 @@ def plot_kmer_cont(cli_arg: str, output_dir:str) -> None:
     :return: None
     """
     # Extract data from file
-    data = pd.read_csv(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.csv')
+    data = pd.read_csv(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_report.csv')
 
     fig = make_subplots(
         rows=1, cols=2,
@@ -363,10 +363,10 @@ def plot_kmer_cont(cli_arg: str, output_dir:str) -> None:
     )
 
     # Save as HTML
-    fig.write_html(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.html')
+    fig.write_html(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.html')
 
     # Save as PNG
-    fig.write_image(f'../data/processed/{output_dir}/{cli_arg}/{cli_arg}.png')
+    fig.write_image(f'data/processed/{output_dir}/{cli_arg}/{cli_arg}_plot.png')
 
 
 

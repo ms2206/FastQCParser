@@ -8,6 +8,7 @@ from tabulate import tabulate
 from pyfiglet import figlet_format
 import emoji
 from utils import qotd_call
+import sys
 
 
 def parse_arguments():
@@ -36,7 +37,14 @@ def parse_arguments():
     parser.add_argument('-k', '--kmer_cont', action='store_true', help='Extract and plot K-mer Content')
     parser.add_argument('-a', '--all', action='store_true', help='Extract and plot all metrics')
 
-    return parser.parse_args()
+    try:
+        args = parser.parse_args()
+    except SystemExit as e:
+        print("\033[91mUh-oh!\033[0m You've crossed into the dark side of invalid arguments.")
+        print('Please check the available options by running the script with -h.')
+        sys.exit(1)
+
+    return args
 
 
 def main():
@@ -99,14 +107,14 @@ def main():
         parsed_data = parse_raw(raw_data.iloc[1:])
 
         # make dir and then save files
-        os.makedirs(f'../data/processed/{args.output_dir}/{optional_arg.cli_argument}', exist_ok=True)
-        parsed_data.to_csv(f'../data/processed/{args.output_dir}/{optional_arg.cli_argument}/{optional_arg.cli_argument}.csv')
+        os.makedirs(f'data/processed/{args.output_dir}/{optional_arg.cli_argument}', exist_ok=True)
+        parsed_data.to_csv(f'data/processed/{args.output_dir}/{optional_arg.cli_argument}/{optional_arg.cli_argument}_report.csv')
 
         # flag
         # first row of the raw_data, tab split
         flag = raw_data.iloc[0].apply(lambda x: x.split('\t')).tolist()[0][1]
-        with open(f'../data/processed/{args.output_dir}/{optional_arg.cli_argument}/flag.txt', 'w') as file:
-            file.write(flag)
+        with open(f'data/processed/{args.output_dir}/{optional_arg.cli_argument}/flag.txt', 'w') as file:
+            file.write(flag.upper())
 
         if optional_arg.value:
             if 'P' in optional_arg.required_outputs:
@@ -152,6 +160,3 @@ def main():
     print(qotd_call())
 if __name__ == '__main__':
     main()
-
-
-#TODO: Extract flag
