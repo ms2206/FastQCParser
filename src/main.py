@@ -16,7 +16,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description='Parse and plot FASTQC data.')
 
     # Add Required Args
-    parser.add_argument('input_file', type=str, help='Path to the FASTQ file.')
+    parser.add_argument('input_file', type=str, help='Path to the FASTQC file.')
     parser.add_argument('output_dir', type=str, help='Directory to save plots.')
 
     # Add Optional Args
