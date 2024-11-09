@@ -1,0 +1,13 @@
+site_name: My Project Documentation
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          setup_commands:
+            - import sys
+            - sys.path.append('.')
+          options:
+            show_root: true
+nav:
+  - Home: index.md
+  - API Reference: api.md
