@@ -47,8 +47,12 @@ def main():
     args = parse_arguments()
 
     # Extract Basic Statistics
-    basic_stats_raw = extract_raw(args.input_file, 'Basic Statistics')
-    formatted_df = parse_raw(basic_stats_raw)
+    try:
+        basic_stats_raw = extract_raw(args.input_file, 'Basic Statistics')
+        formatted_df = parse_raw(basic_stats_raw)
+    except UnicodeDecodeError as e:
+        print(f'Check file format\n{e}')
+        exit(1)
 
     ## CLI Output and Welcome Page
 

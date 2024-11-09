@@ -85,7 +85,8 @@ def extract_raw(filepath: str, search_string: str) -> DataFrame:
         if search_string == 'All the above':
             raw_df = df
         else:
-            print(f'Error: {e}')
+            print(f'\033[91mError!\033[0m {search_string} could not be found within {filepath}: {e}')
+            print('Please check file is of expected format, the input file should be FASTQC')
             exit(1)
 
     return raw_df
