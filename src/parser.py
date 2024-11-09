@@ -8,9 +8,11 @@ import sys
 
 def handle_cli_args(args: Namespace) -> list[ParsedArg]:
     """
-    :param args: cli arguments passed from user
-    :return: a list of ParsedArg objects that have been configured to have their "Required outputs"
-    adjusted based on expected output property.
+    This function further parses args from the ArgParse command line input. It unpacks all args with store_true. Then
+    initiates and configures an instance of Class::ParsedArg for each optional arg that was supplied by the user.
+
+    :param args: cli arguments passed from user :return: a list of ParsedArg objects that have been configured to
+    have their "Required outputs" adjusted based on expected output property.
     """
 
     # unpack args and create dict of all True items (optional args only)
@@ -96,10 +98,9 @@ def parse_raw(raw_data: DataFrame) -> DataFrame:
     """
     Parses raw data from extract_raw().
 
-    This function processes a DataFrame containing raw data, where some lines start with '#'.
-    It extracts lines that do not start with '#', splits them on tab characters, and converts them into a list.
-    It extracts header lines that start with '#', splits them on tab characters, and uses the last header line as column names.
-    The function returns a formatted DataFrame with the extracted values and headers.
+    This function further processes a DataFrame from extract_raw().
+    It gathers all lines that do not start with '#' and slits on tab characters. These are the values from the FASTQC
+    file. It also extracts the headers as lines that start with '#' and uses these two lists to return a pandas DataFrame.
 
     Parameters:
     raw_data (DataFrame): The output from extract_raw()
