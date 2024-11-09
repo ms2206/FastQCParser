@@ -37,12 +37,7 @@ def parse_arguments():
     parser.add_argument('-k', '--kmer_cont', action='store_true', help='Extract and plot K-mer Content')
     parser.add_argument('-a', '--all', action='store_true', help='Extract and plot all metrics')
 
-    try:
-        args = parser.parse_args()
-    except SystemExit as e:
-        print("\033[91mUh-oh!\033[0m You've crossed into the dark side of invalid arguments.")
-        print('Please check the available options by running the script with -h.')
-        sys.exit(1)
+    args = parser.parse_args()
 
     return args
 
@@ -82,8 +77,7 @@ def main():
     print(emoji.emojize('Loading Reports ... :thinking_face:'))
     print()
 
-
-        # returns a list of configured ParsedArg objects
+    # returns a list of configured ParsedArg objects
     optional_args = handle_cli_args(args)
 
     for optional_arg in optional_args:
@@ -108,7 +102,8 @@ def main():
 
         # make dir and then save files
         os.makedirs(f'data/processed/{args.output_dir}/{optional_arg.cli_argument}', exist_ok=True)
-        parsed_data.to_csv(f'data/processed/{args.output_dir}/{optional_arg.cli_argument}/{optional_arg.cli_argument}_report.csv')
+        parsed_data.to_csv(
+            f'data/processed/{args.output_dir}/{optional_arg.cli_argument}/{optional_arg.cli_argument}_report.csv')
 
         # flag
         # first row of the raw_data, tab split
@@ -158,5 +153,7 @@ def main():
 
     print(emoji.emojize('... Complete! :smiling_face_with_sunglasses:'))
     print(qotd_call())
+
+
 if __name__ == '__main__':
     main()
