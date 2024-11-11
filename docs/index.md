@@ -1,5 +1,10 @@
 # FastQCParser User Guide:
 ***
+
+***
+It is recommended to open this via browser: <https://ms2206.github.io/FastQCParser/>
+***
+
 ## Introduction
 A Python program to parse FastQCtext files, and generate reports and plots. 
 
