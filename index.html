@@ -72,8 +72,28 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#fastqcparser" class="nav-link">FastQCParser</a>
+            <li class="nav-item" data-bs-level="1"><a href="#fastqcparser-user-guide" class="nav-link">FastQCParser User Guide:</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#introduction" class="nav-link">Introduction</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#set-up" class="nav-link">Set up</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#optional-args" class="nav-link">Optional Args</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#example-plots" class="nav-link">Example Plots</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#github" class="nav-link">GitHub</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -81,8 +101,60 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="fastqcparser">FastQCParser</h1>
-<p>main will get arguments from user</p></div>
+<h1 id="fastqcparser-user-guide">FastQCParser User Guide:</h1>
+<hr />
+<h2 id="introduction">Introduction</h2>
+<p>A Python program to parse FastQCtext files, and generate reports and plots. </p>
+<ol>
+<li>Clone directory: <code>git clone https://github.com/ms2206/FastQCParser.git</code></li>
+<li>Make a new python environment based from requirments.yaml <code>conda env create -f requirements.yaml --&lt;NAME&gt;</code></li>
+<li>Load environment <NAME> env. <code>conda activate &lt;NAME&gt;</code></li>
+<li>Change directory into FastQCParser</li>
+<li>Example Usage: <code>python3 src/main.py data/raw/fastqc_data2.txt fastqc_2 -a</code></li>
+</ol>
+<hr />
+<h2 id="set-up">Set up</h2>
+<p>Example Usage:
+With python3, run executable found at src/main.py, pass in data/raw/fastqc_data2.txt - as input file, and fastqc_2 as
+output directory. Use optional argument <code>-a</code>.</p>
+<p><code>python3 src/main.py data/raw/fastqc_data2.txt fastqc_2 -a</code></p>
+<p><img src="process_flow/FastQCParser - Set up.svg" alt="FastQCParser Process Flow" width="20000px"></p>
+<hr />
+<h2 id="optional-args">Optional Args</h2>
+<p>Help and misc information provided by ArgeParse for optional arguments. 
+<img src="process_flow/FastQCParser - PF.svg" alt="FastQCParser Process Flow" width="20000px"></p>
+<hr />
+<h2 id="example-plots">Example Plots</h2>
+<h3 id="adapter-content">Adapter Content</h3>
+<p>Plot's adapter content by position.
+<img src="example_img/adap_cont_plot.png" alt="adap_cont_plot" width="1000px"></p>
+<h3 id="kmer-content">Kmer Content</h3>
+<p>Plot's kmer content by position.
+<img src="example_img/kmer_cont_plot.png" alt="kmer_cont_plot" width="1000px"></p>
+<h3 id="overrepresented-sequences">Overrepresented sequences</h3>
+<p>Plot's Per base N content.
+<img src="example_img/per_base_N_cont_plot.png" alt="per_base_N_cont_plot" width="1000px"></p>
+<h3 id="per-base-sequence-content">Per base sequence content</h3>
+<p>Plot's Per base sequence content.
+<img src="example_img/per_base_seq_content_plot.png" alt="per_base_seq_content_plot" width="1000px"></p>
+<h3 id="per-sequence-quality-scores">Per sequence quality scores</h3>
+<p>Plot's Per sequence quality scores.
+<img src="example_img/per_base_seq_qual_plot.png" alt="per_base_seq_qual_plot" width="1000px"></p>
+<h3 id="per-sequence-gc-content">Per sequence GC content</h3>
+<p>Plot's Per sequence GC content.
+<img src="example_img/per_seq_GC_cont_plot.png" alt="per_seq_GC_cont_plot" width="1000px"></p>
+<h3 id="per-sequence-quality-scores_1">Per sequence quality scores</h3>
+<p>Plot's Per sequence quality scores.
+<img src="example_img/per_seq_qual_scores_plot.png" alt="per_seq_qual_scores_plot" width="1000px"></p>
+<h3 id="per-tile-sequence-quality">Per tile sequence quality</h3>
+<p>Plot's Per tile sequence quality.
+<img src="example_img/per_tile_seq_qual_plot.png" alt="per_tile_seq_qual_plot" width="1000px"></p>
+<h3 id="sequence-duplication-levels">Sequence Duplication Levels</h3>
+<p>Plot Sequence Duplication Levels.
+<img src="example_img/seq_dup_plot.png" alt="seq_dup_plot" width="1000px"></p>
+<hr />
+<h2 id="github">GitHub</h2>
+<p><a href="https://github.com/ms2206/FastQCParser.git">https://github.com/ms2206/FastQCParser.git</a></p></div>
             </div>
         </div>
 
@@ -143,5 +215,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2024-11-09 15:03:52.909574+00:00
+Build Date UTC : 2024-11-11 18:06:50.305757+00:00
 -->
