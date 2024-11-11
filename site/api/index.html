@@ -74,6 +74,22 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#api-reference" class="nav-link">API Reference</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#technical-documentation" class="nav-link">Technical Documentation.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#class-definitions" class="nav-link">Class Definitions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#src.class_definitions" class="nav-link">class_definitions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#src.class_definitions.ParsedArg" class="nav-link">ParsedArg</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#parsing" class="nav-link">Parsing</a>
               <ul class="nav flex-column">
               </ul>
@@ -142,18 +158,6 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#class-definitions" class="nav-link">Class Definitions</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#src.class_defenitions" class="nav-link">class_defenitions</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#src.class_defenitions.ParsedArg" class="nav-link">ParsedArg</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -162,6 +166,349 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="api-reference">API Reference</h1>
+<h2 id="technical-documentation">Technical Documentation.</h2>
+<hr />
+<h2 id="class-definitions">Class Definitions</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="src.class_definitions"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.class_definitions.ParsedArg" class="doc doc-heading">
+            <code>ParsedArg</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code>dict</code></p>
+
+
+        <p>A class to represent parsed command-line arguments for sequence quality analysis.</p>
+<p>This class maps command-line arguments to their corresponding search string and manages
+ the required output types based on the argument.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="src.class_definitions.ParsedArg.cli_argument">cli_argument</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The command-line argument provided by the user.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="src.class_definitions.ParsedArg.value">value</span></code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The bool command-line argument from 'store_true'</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="src.class_definitions.ParsedArg.required_outputs">required_outputs</span></code></td>
+            <td>
+                  <code>list</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A list of required output types, defaulting to ['R', 'P', 'F'].</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="src.class_definitions.ParsedArg.search_string">search_string</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Search string to extract from FASTQC - retrieved from the arg_key_map.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="class-attributes" open>
+  <summary>Class Attributes</summary>
+  <p>arg_key_map (dict): A mapping of command-line argument keys to their descriptions.</p>
+</details>
+
+<p><span class="doc-section-title">Methods:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="src.class_definitions.ParsedArg.configure_outputs" href="#src.class_definitions.ParsedArg.configure_outputs">configure_outputs</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Adjusts the required outputs based on the command-line argument.
+                 If the argument is 'seq_len_dist' or 'over_seq', 'P' is removed
+                 from the required outputs.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>parsed_arg = ParsedArg('per_base_seq_qual', 'some_value')
+parsed_arg.configure_outputs()
+['R', 'P', 'F']</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src/class_definitions.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ParsedArg</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class to represent parsed command-line arguments for sequence quality analysis.</span>
+
+<span class="sd">    This class maps command-line arguments to their corresponding search string and manages</span>
+<span class="sd">     the required output types based on the argument.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        cli_argument (str): The command-line argument provided by the user.</span>
+<span class="sd">        value (bool): The bool command-line argument from &#39;store_true&#39;</span>
+<span class="sd">        required_outputs (list): A list of required output types, defaulting to [&#39;R&#39;, &#39;P&#39;, &#39;F&#39;].</span>
+<span class="sd">        search_string (str): Search string to extract from FASTQC - retrieved from the arg_key_map.</span>
+
+<span class="sd">    Class Attributes:</span>
+<span class="sd">        arg_key_map (dict): A mapping of command-line argument keys to their descriptions.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        configure_outputs(): Adjusts the required outputs based on the command-line argument.</span>
+<span class="sd">                             If the argument is &#39;seq_len_dist&#39; or &#39;over_seq&#39;, &#39;P&#39; is removed</span>
+<span class="sd">                             from the required outputs.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; parsed_arg = ParsedArg(&#39;per_base_seq_qual&#39;, &#39;some_value&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; parsed_arg.configure_outputs()</span>
+<span class="sd">        [&#39;R&#39;, &#39;P&#39;, &#39;F&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arg_key_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="s1">&#39;per_base_seq_qual&#39;</span><span class="p">,</span> <span class="s1">&#39;Per base sequence quality&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;per_tile_seq_qual&#39;</span><span class="p">,</span> <span class="s1">&#39;Per tile sequence quality&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;per_seq_qual_scores&#39;</span><span class="p">,</span> <span class="s1">&#39;Per sequence quality scores&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;per_base_seq_content&#39;</span><span class="p">,</span> <span class="s1">&#39;Per base sequence content&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;per_seq_GC_cont&#39;</span><span class="p">,</span> <span class="s1">&#39;Per sequence GC content&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;per_base_N_cont&#39;</span><span class="p">,</span> <span class="s1">&#39;Per base N content&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;seq_len_dist&#39;</span><span class="p">,</span> <span class="s1">&#39;Sequence Length Distribution&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;seq_dup&#39;</span><span class="p">,</span> <span class="s1">&#39;Sequence Duplication Levels&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;over_seq&#39;</span><span class="p">,</span> <span class="s1">&#39;Overrepresented sequences&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;adap_cont&#39;</span><span class="p">,</span> <span class="s1">&#39;Adapter Content&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;kmer_cont&#39;</span><span class="p">,</span> <span class="s1">&#39;Kmer Content&#39;</span><span class="p">)</span>
+                        <span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cli_argument</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cli_argument</span> <span class="o">=</span> <span class="n">cli_argument</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg_key_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cli_argument</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">configure_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes &#39;P&#39; from [&#39;seq_len_dist&#39;, &#39;over_seq&#39;]</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cli_argument</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;seq_len_dist&#39;</span><span class="p">,</span> <span class="s1">&#39;over_seq&#39;</span><span class="p">]:</span> <span class="c1"># Could be made CONSTANT.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ParsedArg(cli_argument=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cli_argument</span><span class="si">!r}</span><span class="s1">, &#39;</span>
+                <span class="sa">f</span><span class="s1">&#39;value=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">!r}</span><span class="s1">, &#39;</span>
+                <span class="sa">f</span><span class="s1">&#39;required_outputs=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span><span class="si">!r}</span><span class="s1">, &#39;</span>
+                <span class="sa">f</span><span class="s1">&#39;search_string=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">search_string</span><span class="si">!r}</span><span class="s1">)&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.class_definitions.ParsedArg.configure_outputs" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">configure_outputs</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Removes 'P' from ['seq_len_dist', 'over_seq']
+:return:</p>
+
+            <details class="quote">
+              <summary>Source code in <code>src/class_definitions.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">configure_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Removes &#39;P&#39; from [&#39;seq_len_dist&#39;, &#39;over_seq&#39;]</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cli_argument</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;seq_len_dist&#39;</span><span class="p">,</span> <span class="s1">&#39;over_seq&#39;</span><span class="p">]:</span> <span class="c1"># Could be made CONSTANT.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div><hr />
 <h2 id="parsing">Parsing</h2>
 
 
@@ -222,9 +569,7 @@ FileNotFoundError: If the specified file does not exist, the function prints an 
 
             <details class="quote">
               <summary>Source code in <code>src/parser.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span>
@@ -282,7 +627,9 @@ FileNotFoundError: If the specified file does not exist, the function prints an 
 <span class="normal">89</span>
 <span class="normal">90</span>
 <span class="normal">91</span>
-<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">extract_raw</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">search_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">extract_raw</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">search_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extracts a section of a CSV file based on a search string and returns it as a DataFrame.</span>
 
@@ -360,9 +707,10 @@ FileNotFoundError: If the specified file does not exist, the function prints an 
 
     <div class="doc doc-contents ">
 
-        <p>:param args: cli arguments passed from user
-:return: a list of ParsedArg objects that have been configured to have their "Required outputs"
-adjusted based on expected output property.</p>
+        <p>This function further parses args from the ArgParse command line input. It unpacks all args with store_true. Then
+initiates and configures an instance of Class::ParsedArg for each optional arg that was supplied by the user.</p>
+<p>:param args: cli arguments passed from user :return: a list of ParsedArg objects that have been configured to
+have their "Required outputs" adjusted based on expected output property.</p>
 
             <details class="quote">
               <summary>Source code in <code>src/parser.py</code></summary>
@@ -386,11 +734,15 @@ adjusted based on expected output property.</p>
 <span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
-<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">handle_cli_args</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ParsedArg</span><span class="p">]:</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">handle_cli_args</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ParsedArg</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    :param args: cli arguments passed from user</span>
-<span class="sd">    :return: a list of ParsedArg objects that have been configured to have their &quot;Required outputs&quot;</span>
-<span class="sd">    adjusted based on expected output property.</span>
+<span class="sd">    This function further parses args from the ArgParse command line input. It unpacks all args with store_true. Then</span>
+<span class="sd">    initiates and configures an instance of Class::ParsedArg for each optional arg that was supplied by the user.</span>
+
+<span class="sd">    :param args: cli arguments passed from user :return: a list of ParsedArg objects that have been configured to</span>
+<span class="sd">    have their &quot;Required outputs&quot; adjusted based on expected output property.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># unpack args and create dict of all True items (optional args only)</span>
@@ -425,10 +777,9 @@ adjusted based on expected output property.</p>
     <div class="doc doc-contents ">
 
         <p>Parses raw data from extract_raw().</p>
-<p>This function processes a DataFrame containing raw data, where some lines start with '#'.
-It extracts lines that do not start with '#', splits them on tab characters, and converts them into a list.
-It extracts header lines that start with '#', splits them on tab characters, and uses the last header line as column names.
-The function returns a formatted DataFrame with the extracted values and headers.</p>
+<p>This function further processes a DataFrame from extract_raw().
+It gathers all lines that do not start with '#' and slits on tab characters. These are the values from the FASTQC
+file. It also extracts the headers as lines that start with '#' and uses these two lists to return a pandas DataFrame.</p>
 <p>Parameters:
 raw_data (DataFrame): The output from extract_raw()</p>
 <p>Returns:
@@ -446,9 +797,7 @@ print(formatted_df)</p>
 
             <details class="quote">
               <summary>Source code in <code>src/parser.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
@@ -488,14 +837,14 @@ print(formatted_df)</p>
 <span class="normal">134</span>
 <span class="normal">135</span>
 <span class="normal">136</span>
-<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">parse_raw</span><span class="p">(</span><span class="n">raw_data</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+<span class="normal">137</span>
+<span class="normal">138</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">parse_raw</span><span class="p">(</span><span class="n">raw_data</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parses raw data from extract_raw().</span>
 
-<span class="sd">    This function processes a DataFrame containing raw data, where some lines start with &#39;#&#39;.</span>
-<span class="sd">    It extracts lines that do not start with &#39;#&#39;, splits them on tab characters, and converts them into a list.</span>
-<span class="sd">    It extracts header lines that start with &#39;#&#39;, splits them on tab characters, and uses the last header line as column names.</span>
-<span class="sd">    The function returns a formatted DataFrame with the extracted values and headers.</span>
+<span class="sd">    This function further processes a DataFrame from extract_raw().</span>
+<span class="sd">    It gathers all lines that do not start with &#39;#&#39; and slits on tab characters. These are the values from the FASTQC</span>
+<span class="sd">    file. It also extracts the headers as lines that start with &#39;#&#39; and uses these two lists to return a pandas DataFrame.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">    raw_data (DataFrame): The output from extract_raw()</span>
@@ -543,7 +892,8 @@ print(formatted_df)</p>
 
     </div>
 
-</div><h2 id="plotting">Plotting</h2>
+</div><hr />
+<h2 id="plotting">Plotting</h2>
 
 
 <div class="doc doc-object doc-module">
@@ -1463,346 +1813,6 @@ print(formatted_df)</p>
     </div>
 
 </div>
-
-
-
-  </div>
-
-    </div>
-
-</div><h2 id="class-definitions">Class Definitions</h2>
-
-
-<div class="doc doc-object doc-module">
-
-
-
-<a id="src.class_defenitions"></a>
-    <div class="doc doc-contents first">
-
-
-
-
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-class">
-
-
-
-<h2 id="src.class_defenitions.ParsedArg" class="doc doc-heading">
-            <code>ParsedArg</code>
-
-
-</h2>
-
-
-    <div class="doc doc-contents ">
-            <p class="doc doc-class-bases">
-              Bases: <code>dict</code></p>
-
-
-        <p>A class to represent parsed command-line arguments for sequence quality analysis.</p>
-<p>This class maps command-line arguments to their corresponding search string and manages
- the required output types based on the argument.</p>
-
-
-<p><span class="doc-section-title">Attributes:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td><code><span title="src.class_defenitions.ParsedArg.cli_argument">cli_argument</span></code></td>
-            <td>
-                  <code>str</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>The command-line argument provided by the user.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><span title="src.class_defenitions.ParsedArg.value">value</span></code></td>
-            <td>
-                  <code>bool</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>The bool command-line argument from 'store_true'</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><span title="src.class_defenitions.ParsedArg.required_outputs">required_outputs</span></code></td>
-            <td>
-                  <code>list</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>A list of required output types, defaulting to ['R', 'P', 'F'].</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><span title="src.class_defenitions.ParsedArg.search_string">search_string</span></code></td>
-            <td>
-                  <code>str</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Search string to extract from FASTQC - retrieved from the arg_key_map.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-<details class="class-attributes" open>
-  <summary>Class Attributes</summary>
-  <p>arg_key_map (dict): A mapping of command-line argument keys to their descriptions.</p>
-</details>
-
-<p><span class="doc-section-title">Methods:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-            <tr class="doc-section-item">
-              <td><code><a class="autorefs autorefs-internal" title="src.class_defenitions.ParsedArg.configure_outputs" href="#src.class_defenitions.ParsedArg.configure_outputs">configure_outputs</a></code></td>
-              <td>
-                <div class="doc-md-description">
-                  <p>Adjusts the required outputs based on the command-line argument.
-                 If the argument is 'seq_len_dist' or 'over_seq', 'P' is removed
-                 from the required outputs.</p>
-                </div>
-              </td>
-            </tr>
-      </tbody>
-    </table>
-
-
-<details class="example" open>
-  <summary>Example</summary>
-  <blockquote>
-<blockquote>
-<blockquote>
-<p>parsed_arg = ParsedArg('per_base_seq_qual', 'some_value')
-parsed_arg.configure_outputs()
-['R', 'P', 'F']</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</details>
-
-
-
-
-
-              <details class="quote">
-                <summary>Source code in <code>src/class_defenitions.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ParsedArg</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A class to represent parsed command-line arguments for sequence quality analysis.</span>
-
-<span class="sd">    This class maps command-line arguments to their corresponding search string and manages</span>
-<span class="sd">     the required output types based on the argument.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        cli_argument (str): The command-line argument provided by the user.</span>
-<span class="sd">        value (bool): The bool command-line argument from &#39;store_true&#39;</span>
-<span class="sd">        required_outputs (list): A list of required output types, defaulting to [&#39;R&#39;, &#39;P&#39;, &#39;F&#39;].</span>
-<span class="sd">        search_string (str): Search string to extract from FASTQC - retrieved from the arg_key_map.</span>
-
-<span class="sd">    Class Attributes:</span>
-<span class="sd">        arg_key_map (dict): A mapping of command-line argument keys to their descriptions.</span>
-
-<span class="sd">    Methods:</span>
-<span class="sd">        configure_outputs(): Adjusts the required outputs based on the command-line argument.</span>
-<span class="sd">                             If the argument is &#39;seq_len_dist&#39; or &#39;over_seq&#39;, &#39;P&#39; is removed</span>
-<span class="sd">                             from the required outputs.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; parsed_arg = ParsedArg(&#39;per_base_seq_qual&#39;, &#39;some_value&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; parsed_arg.configure_outputs()</span>
-<span class="sd">        [&#39;R&#39;, &#39;P&#39;, &#39;F&#39;]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">arg_key_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="s1">&#39;per_base_seq_qual&#39;</span><span class="p">,</span> <span class="s1">&#39;Per base sequence quality&#39;</span><span class="p">),</span>
-                        <span class="p">(</span><span class="s1">&#39;per_tile_seq_qual&#39;</span><span class="p">,</span> <span class="s1">&#39;Per tile sequence quality&#39;</span><span class="p">),</span>
-                        <span class="p">(</span><span class="s1">&#39;per_seq_qual_scores&#39;</span><span class="p">,</span> <span class="s1">&#39;Per sequence quality scores&#39;</span><span class="p">),</span>
-                        <span class="p">(</span><span class="s1">&#39;per_base_seq_content&#39;</span><span class="p">,</span> <span class="s1">&#39;Per base sequence content&#39;</span><span class="p">),</span>
-                        <span class="p">(</span><span class="s1">&#39;per_seq_GC_cont&#39;</span><span class="p">,</span> <span class="s1">&#39;Per sequence GC content&#39;</span><span class="p">),</span>
-                        <span class="p">(</span><span class="s1">&#39;per_base_N_cont&#39;</span><span class="p">,</span> <span class="s1">&#39;Per base N content&#39;</span><span class="p">),</span>
-                        <span class="p">(</span><span class="s1">&#39;seq_len_dist&#39;</span><span class="p">,</span> <span class="s1">&#39;Sequence Length Distribution&#39;</span><span class="p">),</span>
-                        <span class="p">(</span><span class="s1">&#39;seq_dup&#39;</span><span class="p">,</span> <span class="s1">&#39;Sequence Duplication Levels&#39;</span><span class="p">),</span>
-                        <span class="p">(</span><span class="s1">&#39;over_seq&#39;</span><span class="p">,</span> <span class="s1">&#39;Overrepresented sequences&#39;</span><span class="p">),</span>
-                        <span class="p">(</span><span class="s1">&#39;adap_cont&#39;</span><span class="p">,</span> <span class="s1">&#39;Adapter Content&#39;</span><span class="p">),</span>
-                        <span class="p">(</span><span class="s1">&#39;kmer_cont&#39;</span><span class="p">,</span> <span class="s1">&#39;Kmer Content&#39;</span><span class="p">)</span>
-                        <span class="p">])</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cli_argument</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cli_argument</span> <span class="o">=</span> <span class="n">cli_argument</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">search_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg_key_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cli_argument</span><span class="p">)</span>
-
-
-    <span class="k">def</span> <span class="nf">configure_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Removes &#39;P&#39; from [&#39;seq_len_dist&#39;, &#39;over_seq&#39;]</span>
-<span class="sd">        :return:</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cli_argument</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;seq_len_dist&#39;</span><span class="p">,</span> <span class="s1">&#39;over_seq&#39;</span><span class="p">]:</span> <span class="c1"># Could be made CONSTANT.</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span>
-
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ParsedArg(cli_argument=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cli_argument</span><span class="si">!r}</span><span class="s1">, &#39;</span>
-                <span class="sa">f</span><span class="s1">&#39;value=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">!r}</span><span class="s1">, &#39;</span>
-                <span class="sa">f</span><span class="s1">&#39;required_outputs=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span><span class="si">!r}</span><span class="s1">, &#39;</span>
-                <span class="sa">f</span><span class="s1">&#39;search_string=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">search_string</span><span class="si">!r}</span><span class="s1">)&#39;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-              </details>
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="src.class_defenitions.ParsedArg.configure_outputs" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">configure_outputs</span><span class="p">()</span></code>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Removes 'P' from ['seq_len_dist', 'over_seq']
-:return:</p>
-
-            <details class="quote">
-              <summary>Source code in <code>src/class_defenitions.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">configure_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Removes &#39;P&#39; from [&#39;seq_len_dist&#39;, &#39;over_seq&#39;]</span>
-<span class="sd">    :return:</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cli_argument</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;seq_len_dist&#39;</span><span class="p">,</span> <span class="s1">&#39;over_seq&#39;</span><span class="p">]:</span> <span class="c1"># Could be made CONSTANT.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_outputs</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-
-
-  </div>
-
-    </div>
-
-</div>
-
 
 
 
