@@ -1,6 +1,6 @@
 # FastQCParser
 
-See technical documentation:
+# FastQCParser Technical Docs: 
 https://ms2206.github.io/FastQCParser/
 
 
