@@ -1,10 +1,10 @@
 # FastQCParser
 
-# FastQCParser Technical Docs: 
+## FastQCParser Technical Docs: 
 https://ms2206.github.io/FastQCParser/
 
 
-# FastQCParser User Guide:
+## FastQCParser User Guide:
 ***
 ## Introduction
 A Python program to parse FastQCtext files, and generate reports and plots. 
