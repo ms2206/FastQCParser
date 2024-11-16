@@ -99,7 +99,7 @@ def parse_raw(raw_data: DataFrame) -> DataFrame:
     Parses raw data from extract_raw().
 
     This function further processes a DataFrame from extract_raw().
-    It gathers all lines that do not start with '#' and slits on tab characters. These are the values from the FASTQC
+    It gathers all lines that do not start with '#' and splits on tab characters. These are the values from the FASTQC
     file. It also extracts the headers as lines that start with '#' and uses these two lists to return a pandas DataFrame.
 
     Parameters:
