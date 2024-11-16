@@ -1,6 +1,6 @@
 from argparse import Namespace
 from typing import List
-from class_defenitions import ParsedArg
+from class_definitions import ParsedArg
 import pandas as pd
 from pandas import DataFrame
 import sys
