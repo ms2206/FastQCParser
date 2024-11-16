@@ -1,10 +1,12 @@
 # FastQCParser
 
 ## FastQCParser Technical Docs: 
-https://ms2206.github.io/FastQCParser/
+https://ms2206.github.io/FastQCParser/api/
 
 
 ## FastQCParser User Guide:
+https://ms2206.github.io/FastQCParser/
+
 ***
 ## Introduction
 A Python program to parse FastQCtext files, and generate reports and plots. 
@@ -17,8 +19,14 @@ A Python program to parse FastQCtext files, and generate reports and plots.
 ***
 ## Set up
 Example Usage:
-With python3, run executable found at src/main.py, pass in data/raw/fastqc_data2.txt - as input file, and fastqc_2 as
-output directory. Use optional argument `-a`.
+With python3, run executable found at src/main.py.
+
+Pass `data/raw/fastqc_data2.txt` - as input file, and `fastqc_2` as
+output directory (or use a customer directory name).
+
+Use optional argument `-a`.
+
+`python3 src/main.py <FASTQ FILE> <DIR_NAME> [-a][<OPTIONAL_ARGS>]`
 
 `python3 src/main.py data/raw/fastqc_data2.txt fastqc_2 -a`
 
@@ -26,7 +34,10 @@ output directory. Use optional argument `-a`.
 
 ***
 ## Optional Args
-Help and misc information provided by ArgeParse for optional arguments. 
+Help and misc information provided by ArgeParse for optional arguments.  
+
+`python3 src/main.py -h`
+
 <img src="docs/process_flow/FastQCParser - PF.svg" alt="FastQCParser Process Flow" width="20000px">
 
 ***
