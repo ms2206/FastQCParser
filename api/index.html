@@ -168,7 +168,7 @@
 <h1 id="api-reference">API Reference</h1>
 <h2 id="technical-documentation">Technical Documentation.</h2>
 <hr />
-<p>It is recommended to open this via browser: <a href="https://ms2206.github.io/FastQCParser/">https://ms2206.github.io/FastQCParser/</a></p>
+<p>It is recommended to open this via browser: <a href="https://ms2206.github.io/FastQCParser/api/">https://ms2206.github.io/FastQCParser/api/</a></p>
 <hr />
 <h2 id="class-definitions">Class Definitions</h2>
 
@@ -780,7 +780,7 @@ have their "Required outputs" adjusted based on expected output property.</p>
 
         <p>Parses raw data from extract_raw().</p>
 <p>This function further processes a DataFrame from extract_raw().
-It gathers all lines that do not start with '#' and slits on tab characters. These are the values from the FASTQC
+It gathers all lines that do not start with '#' and splits on tab characters. These are the values from the FASTQC
 file. It also extracts the headers as lines that start with '#' and uses these two lists to return a pandas DataFrame.</p>
 <p>Parameters:
 raw_data (DataFrame): The output from extract_raw()</p>
@@ -845,7 +845,7 @@ print(formatted_df)</p>
 <span class="sd">    Parses raw data from extract_raw().</span>
 
 <span class="sd">    This function further processes a DataFrame from extract_raw().</span>
-<span class="sd">    It gathers all lines that do not start with &#39;#&#39; and slits on tab characters. These are the values from the FASTQC</span>
+<span class="sd">    It gathers all lines that do not start with &#39;#&#39; and splits on tab characters. These are the values from the FASTQC</span>
 <span class="sd">    file. It also extracts the headers as lines that start with &#39;#&#39; and uses these two lists to return a pandas DataFrame.</span>
 
 <span class="sd">    Parameters:</span>
