@@ -106,6 +106,8 @@ def main():
         parsed_data = parse_raw(raw_data.iloc[1:])
 
         # make dir and then save files
+
+        #TODO: make the output dir the users Downloads folder
         os.makedirs(f'data/processed/{args.output_dir}/{optional_arg.cli_argument}', exist_ok=True)
         parsed_data.to_csv(
             f'data/processed/{args.output_dir}/{optional_arg.cli_argument}/{optional_arg.cli_argument}_report.csv')
