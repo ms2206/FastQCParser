@@ -4,6 +4,7 @@ from plotter import plot_adap_cont, plot_per_base_seq_qual, plot_per_tile_seq_qu
     plot_per_base_seq_content, plot_per_seq_GC_cont, plot_per_base_N_cont, plot_seq_len_dist, plot_seq_dup, \
     plot_kmer_cont
 import os
+from pathlib import Path
 from tabulate import tabulate
 from pyfiglet import figlet_format
 import emoji
@@ -108,52 +109,62 @@ def main():
         # make dir and then save files
 
         #TODO: make the output dir the users Downloads folder
-        os.makedirs(f'data/processed/{args.output_dir}/{optional_arg.cli_argument}', exist_ok=True)
-        parsed_data.to_csv(
-            f'data/processed/{args.output_dir}/{optional_arg.cli_argument}/{optional_arg.cli_argument}_report.csv')
+
+        # get path to users Downloads foler <-- mac specific
+        downloads_path = os.path.expanduser("~/Downloads")
+
+        # psudo code make path for Downloads > user_folder > argument_named_folder
+        output_folder_path = os.path.join(downloads_path, args.output_dir,optional_arg.cli_argument)
+
+        # make folder from path
+        Path(output_folder_path).mkdir(parents=True, exist_ok=True)
+
+        # save output report from parsed_data to user specified folder in downloads
+        csv_path = os.path.join(output_folder_path, f'{optional_arg.cli_argument}_report.csv')
+        parsed_data.to_csv(csv_path, index=True)
 
         # flag
         # first row of the raw_data, tab split
         flag = raw_data.iloc[0].apply(lambda x: x.split('\t')).tolist()[0][1]
-        with open(f'data/processed/{args.output_dir}/{optional_arg.cli_argument}/flag.txt', 'w') as file:
+        with open(f'{output_folder_path}/flag.txt', 'w') as file:
             file.write(flag.upper())
 
         if optional_arg.value:
             if 'P' in optional_arg.required_outputs:
                 if optional_arg.cli_argument == 'per_base_seq_qual':
-                    plot_per_base_seq_qual(optional_arg.cli_argument, args.output_dir)
+                    plot_per_base_seq_qual(optional_arg.cli_argument, output_folder_path)
 
                 elif optional_arg.cli_argument == 'per_tile_seq_qual':
-                    plot_per_tile_seq_qual(optional_arg.cli_argument, args.output_dir)
+                    plot_per_tile_seq_qual(optional_arg.cli_argument, output_folder_path)
 
                 elif optional_arg.cli_argument == 'per_seq_qual_scores':
-                    plot_per_seq_qual_scores(optional_arg.cli_argument, args.output_dir)
+                    plot_per_seq_qual_scores(optional_arg.cli_argument, output_folder_path)
 
                 elif optional_arg.cli_argument == 'per_base_seq_content':
-                    plot_per_base_seq_content(optional_arg.cli_argument, args.output_dir)
+                    plot_per_base_seq_content(optional_arg.cli_argument, output_folder_path)
 
                 elif optional_arg.cli_argument == 'per_seq_GC_cont':
-                    plot_per_seq_GC_cont(optional_arg.cli_argument, args.output_dir)
+                    plot_per_seq_GC_cont(optional_arg.cli_argument, output_folder_path)
 
                 elif optional_arg.cli_argument == 'per_base_N_cont':
-                    plot_per_base_N_cont(optional_arg.cli_argument, args.output_dir)
+                    plot_per_base_N_cont(optional_arg.cli_argument, output_folder_path)
 
                 elif optional_arg.cli_argument == 'seq_len_dist':
                     ## NO PLT CURRENTLY REQUIRED ##
-                    plot_seq_len_dist(optional_arg.cli_argument, args.output_dir)
+                    plot_seq_len_dist(optional_arg.cli_argument, output_folder_path)
 
                 elif optional_arg.cli_argument == 'seq_dup':
-                    plot_seq_dup(optional_arg.cli_argument, args.output_dir)
+                    plot_seq_dup(optional_arg.cli_argument, output_folder_path)
 
                 elif optional_arg.cli_argument == 'over_seq':
                     ## NO PLT CURRENTLY REQUIRED ##
                     continue
 
                 elif optional_arg.cli_argument == 'adap_cont':
-                    plot_adap_cont(optional_arg.cli_argument, args.output_dir)
+                    plot_adap_cont(optional_arg.cli_argument, output_folder_path)
 
                 elif optional_arg.cli_argument == 'kmer_cont':
-                    plot_kmer_cont(optional_arg.cli_argument, args.output_dir)
+                    plot_kmer_cont(optional_arg.cli_argument, output_folder_path)
 
                 else:
                     print(optional_arg)
