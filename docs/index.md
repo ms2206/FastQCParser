@@ -7,13 +7,15 @@ It is recommended to open this via browser: <a href="https://ms2206.github.io/Fa
 ***
 
 ## Introduction
-A Python program to parse FastQCtext files, and generate reports and plots. 
+A Python program to parse FastQCtext files, and generate reports and plots.
 
 1. Clone directory: `git clone https://github.com/ms2206/FastQCParser.git`
 2. Make a new python environment based from requirments.yaml `conda env create -f requirements.yaml --<NAME>`
 3. Load environment <NAME> env. `conda activate <NAME>`
 4. Change directory into FastQCParser
 5. Example Usage: `python3 src/main.py data/raw/fastqc_data2.txt fastqc_2 -a`
+
+-- plots are downloaded to the users `~/Downloads/` folder.
 ***
 ## Set up
 Example Usage:

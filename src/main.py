@@ -66,7 +66,7 @@ def main():
     print('GitHub: https://github.com/ms2206/FastQCParser.git')
     print('See technical documentation: https://ms2206.github.io/FastQCParser/')
     print('Email: matthew.spriggs.452@cranfield.ac.uk')
-    print('Version: 1.0.0')
+    print('Version: 1.1.0')
     print(emoji.emojize('Donations Welcome :red_heart:'))
     print('____________________________________________________________________________________\n')
 
@@ -78,7 +78,7 @@ def main():
     print()
     print('#' * 84)
     print(f'INPUT FILE USED: {args.input_file}')
-    print(f'OUTPUT DIRECTORY USED: /FastQCParser/data/processed/{args.output_dir}/')
+    print(f'OUTPUT DIRECTORY USED: ~/Downloads/{args.output_dir}/')
     print('__\n')
     print(emoji.emojize('Loading Reports ... :thinking_face:'))
     print()

@@ -12,7 +12,7 @@ default_figsize = go.Layout(width=900, height=600)
 
 def plot_adap_cont(cli_arg: str, output_dir:str) -> None:
     """
-    Plot and save plot_adap_cont to filepath
+    Plot and save plot_adap_cont to ~/Downloads/
     :return: None
     """
 
@@ -47,7 +47,7 @@ def plot_adap_cont(cli_arg: str, output_dir:str) -> None:
 
 def plot_per_base_seq_qual(cli_arg: str, output_dir:str) -> None:
     """
-    Plot and save per_base_seq_qual to filepath
+    Plot and save per_base_seq_qual to ~/Downloads/
     :return: None
     """
 
@@ -107,7 +107,7 @@ def plot_per_base_seq_qual(cli_arg: str, output_dir:str) -> None:
 
 def plot_per_tile_seq_qual(cli_arg: str, output_dir:str) -> None:
     """
-    Plot and save per_tile_seq_qual to filepath
+    Plot and save per_tile_seq_qual to ~/Downloads/
     :return: None
     """
 
@@ -138,7 +138,7 @@ def plot_per_tile_seq_qual(cli_arg: str, output_dir:str) -> None:
 
 def plot_per_seq_qual_scores(cli_arg: str, output_dir:str) -> None:
     """
-    Plot and save per_seq_qual_scores to filepath
+    Plot and save per_seq_qual_scores to ~/Downloads/
     :return: None
     """
 
@@ -169,7 +169,7 @@ def plot_per_seq_qual_scores(cli_arg: str, output_dir:str) -> None:
 
 def plot_per_base_seq_content(cli_arg: str, output_dir:str) -> None:
     """
-    Plot and save per_base_seq_content to filepath
+    Plot and save per_base_seq_content to ~/Downloads/
     :return: None
     """
     # Extract data from file
@@ -205,7 +205,7 @@ def plot_per_base_seq_content(cli_arg: str, output_dir:str) -> None:
 
 def plot_per_seq_GC_cont(cli_arg: str, output_dir:str) -> None:
     """
-    Plot and save per_base_seq_content to filepath
+    Plot and save per_base_seq_content to ~/Downloads/
     :return: None
     """
     # Extract data from file
@@ -248,7 +248,7 @@ def plot_per_seq_GC_cont(cli_arg: str, output_dir:str) -> None:
 
 def plot_per_base_N_cont(cli_arg: str, output_dir:str) -> None:
     """
-    Plot and save per_base_N_cont to filepath
+    Plot and save per_base_N_cont to ~/Downloads/
     :return: None
     """
     # Extract data from file
@@ -282,7 +282,7 @@ def plot_per_base_N_cont(cli_arg: str, output_dir:str) -> None:
 
 def plot_seq_len_dist(cli_arg: str, output_dir:str) -> None:
     """
-    Plot and save per_base_N_cont to filepath
+    Plot and save per_base_N_cont to ~/Downloads/
     :return: None
     """
     # Extract data from file
@@ -322,7 +322,7 @@ def plot_seq_len_dist(cli_arg: str, output_dir:str) -> None:
 
 def plot_seq_dup(cli_arg: str, output_dir:str) -> None:
     """
-    Plot and save per_base_N_cont to filepath
+    Plot and save per_base_N_cont to ~/Downloads/
     :return: None
     """
     # Extract data from file
@@ -353,7 +353,7 @@ def plot_seq_dup(cli_arg: str, output_dir:str) -> None:
 
 def plot_kmer_cont(cli_arg: str, output_dir:str) -> None:
     """
-    Plot and save per_base_N_cont to filepath
+    Plot and save per_base_N_cont to ~/Downloads/
     :return: None
     """
     # Extract data from file
