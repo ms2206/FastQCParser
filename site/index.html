@@ -72,8 +72,12 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#fastqcparser-user-guide" class="nav-link">FastQCParser User Guide:</a>
+            <li class="nav-item" data-bs-level="1"><a href="#fastqcparser" class="nav-link">FastQCParser</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#fastqcparser-user-guide" class="nav-link">FastQCParser User Guide:</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#introduction" class="nav-link">Introduction</a>
               <ul class="nav flex-column">
               </ul>
@@ -101,10 +105,13 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="fastqcparser-user-guide">FastQCParser User Guide:</h1>
+<h1 id="fastqcparser">FastQCParser</h1>
+<h2 id="fastqcparser-user-guide">FastQCParser User Guide:</h2>
+<hr />
+<p>It is recommended to open this via browser: <a href="https://ms2206.github.io/FastQCParser">User Guide</a></p>
 <hr />
 <h2 id="introduction">Introduction</h2>
-<p>A Python program to parse FastQCtext files, and generate reports and plots. </p>
+<p>A Python program to parse FastQCtext files, and generate reports and plots.</p>
 <ol>
 <li>Clone directory: <code>git clone https://github.com/ms2206/FastQCParser.git</code></li>
 <li>Make a new python environment based from requirments.yaml <code>conda env create -f requirements.yaml --&lt;NAME&gt;</code></li>
@@ -112,17 +119,22 @@
 <li>Change directory into FastQCParser</li>
 <li>Example Usage: <code>python3 src/main.py data/raw/fastqc_data2.txt fastqc_2 -a</code></li>
 </ol>
+<p>-- plots are downloaded to the users <code>~/Downloads/</code> folder.</p>
 <hr />
 <h2 id="set-up">Set up</h2>
 <p>Example Usage:
-With python3, run executable found at src/main.py, pass in data/raw/fastqc_data2.txt - as input file, and fastqc_2 as
-output directory. Use optional argument <code>-a</code>.</p>
+With python3, run executable found at <code>src/main.py</code>.</p>
+<p>Pass <code>data/raw/fastqc_data2.txt</code> (or any fastqc file) - as input file, and <code>fastqc_2</code> as
+output directory (or use a customer directory name).</p>
+<p>Use optional argument <code>-a</code>.</p>
+<p><code>python3 src/main.py &lt;FASTQ FILE&gt; &lt;DIR_NAME&gt; [&lt;OPTIONAL_ARGS&gt;]</code></p>
 <p><code>python3 src/main.py data/raw/fastqc_data2.txt fastqc_2 -a</code></p>
 <p><img src="process_flow/FastQCParser - Set up.svg" alt="FastQCParser Process Flow" width="20000px"></p>
 <hr />
 <h2 id="optional-args">Optional Args</h2>
-<p>Help and misc information provided by ArgeParse for optional arguments. 
-<img src="process_flow/FastQCParser - PF.svg" alt="FastQCParser Process Flow" width="20000px"></p>
+<p>Help and misc information provided by ArgeParse for optional arguments.  </p>
+<p><code>python3 src/main.py -h</code></p>
+<p><img src="process_flow/FastQCParser - PF.svg" alt="FastQCParser Process Flow" width="20000px"></p>
 <hr />
 <h2 id="example-plots">Example Plots</h2>
 <h3 id="adapter-content">Adapter Content</h3>
@@ -215,5 +227,5 @@ output directory. Use optional argument <code>-a</code>.</p>
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2024-11-11 18:17:46.685977+00:00
+Build Date UTC : 2024-11-21 16:30:14.609735+00:00
 -->
