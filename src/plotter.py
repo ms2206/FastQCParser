@@ -5,6 +5,7 @@ import plotly.express as px
 from scipy.stats import norm
 from plotly.subplots import make_subplots
 import os
+import pdb
 
 
 default_figsize = go.Layout(width=900, height=600)
@@ -59,9 +60,17 @@ def plot_per_base_seq_qual(cli_arg: str, output_dir:str) -> None:
 
     # Collect data points for manually creating box plot
     for index, row in data.iloc[:, 1:].iterrows():
+
+        # `#Base` can be represented as `DD-DD` in some fastcq files
+        # first try cast to int
+        try:
+            x_name = str(int(row['#Base']))
+        except ValueError:
+            x_name = str(row['#Base'])
+
         box_plots.append(
             go.Box(y=[row['Lower Quartile'], row['Median'], row['Upper Quartile']],
-                   name=int(row['#Base']),
+                   name=x_name,
                    marker_color='black')
         )
 
@@ -93,7 +102,7 @@ def plot_per_base_seq_qual(cli_arg: str, output_dir:str) -> None:
         template='plotly_white',
         showlegend=False,
         yaxis=dict(range=[0, max(data['Upper Quartile']) + 5]),
-        xaxis=dict(tickangle=0)
+        xaxis=dict(tickangle=90)
     )
 
     # Save as HTML
